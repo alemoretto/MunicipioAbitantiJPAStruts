@@ -8,19 +8,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Inserisci nuovo Municipio</title>
+<title>Modifica Municipio</title>
 </head>
 <body>
 <div class="container">
 <br><br>
 
 		<div class="page-header">
-			<h3>Pagina di Inserimento Municipio</h3>
+			<h3>Pagina di modifica Municipio</h3>
 		</div>
 			<br>
 			<br>
 
 <form class="form-horizontal" action="${pageContext.request.contextPath }/municipio.do" method="post">
+	<input type="hidden" name="id" value="${MunicipioForm.id}">
+
 				<div class="form-group">
 				<label class="control-label col-sm-2" for="descrizioneId">Descrizione:</label>
 				<!--<c:if test="${messaggiDiErrore.descrizione != null}">
@@ -58,8 +60,8 @@
 				</div>
 			</div>
 
-	<input type="hidden" name="codop" value="save"> 
-	<input class="btn btn-primary btn-md" type="submit" value="INSERISCI">
+	<input type="hidden" name="codop" value="update"> 
+	<input class="btn btn-primary btn-md" type="submit" value="AGGIORNA">
 </form>
 
 </div>

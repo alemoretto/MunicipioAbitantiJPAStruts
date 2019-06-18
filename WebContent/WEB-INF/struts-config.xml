@@ -8,6 +8,8 @@
 	<form-beans>
 		<form-bean name="MunicipioForm"
 			type="it.municipioabitantejpa.struts.form.MunicipioForm" />
+		<form-bean name="AbitanteForm"
+			type="it.municipioabitantejpa.struts.form.AbitanteForm" />			
 	</form-beans>
 
 	<global-exceptions>
@@ -21,16 +23,27 @@
 		<!-- GIRO DELLA HOME -->
 		<action path="/home" 
 			type="it.municipioabitantejpa.struts.action.HomeAction">
-			<forward name="success" path="/jsp/municipio/list.jsp" />
+<!-- 			<forward name="success" path="/jsp/municipio/list.jsp" /> -->
+		<forward name="success" path="/jsp/newHome.jsp" />
 		</action>
 		
 		<!-- GIRO DELLA DISPATCH -->
 		<action path="/municipio" name="MunicipioForm" scope="request" parameter="codop"
-			type="it.municipioabitantejpa.struts.action.MunicipioAction">
+			type="it.municipioabitantejpa.struts.action.MunicipioAction" validate="false">
+			<forward name="list" path="/jsp/municipio/list.jsp" />
 			<forward name="show" path="/jsp/municipio/show.jsp" />
 			<forward name="create" path="/jsp/municipio/create.jsp" />
+			<forward name="edit" path="/jsp/municipio/edit.jsp" />
+			
 		</action>
 		
+		<!-- GIRO DELLA DISPATCH -->
+		<action path="/abitante" name="AbitanteForm" scope="request" parameter="codop"
+			type="it.municipioabitantejpa.struts.action.AbitanteAction">
+			<forward name="list" path="/jsp/abitante/list.jsp" />
+<!-- 			<forward name="show" path="/jsp/municipio/show.jsp" /> -->
+<!-- 			<forward name="create" path="/jsp/municipio/create.jsp" /> -->
+		</action>
 	</action-mappings>
 
 	<message-resources parameter="resource.MessageResource"></message-resources>

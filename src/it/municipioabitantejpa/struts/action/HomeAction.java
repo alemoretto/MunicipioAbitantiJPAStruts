@@ -12,11 +12,18 @@ import it.municipioabitantejpa.service.MyServiceFactory;
 
 public class HomeAction extends Action {
 
+//	@Override
+//	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//
+//		request.setAttribute("municipiList", MyServiceFactory.getMunicipioServiceInstance().listAllMunicipi());
+//		return mapping.findForward("success");
+//	}
+	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		request.setAttribute("municipiList", MyServiceFactory.getMunicipioServiceInstance().listAllMunicipi());
 		return mapping.findForward("success");
 	}
 

@@ -16,14 +16,20 @@ import it.municipioabitantejpa.struts.form.MunicipioForm;
 
 public class MunicipioAction extends DispatchAction {
 
+	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		request.setAttribute("municipiList", MyServiceFactory.getMunicipioServiceInstance().listAllMunicipi());
+		return mapping.findForward("list");
+	}
+	
 	public ActionForward show(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		String idMunicipioParam = request.getParameter("idMunicipio");
-		long idMunicipio = Long.parseLong(idMunicipioParam);
+		MunicipioForm municipioForm = (MunicipioForm) form;
 		Municipio municipioInstance = MyServiceFactory.getMunicipioServiceInstance()
-				.caricaSingoloMunicipio(idMunicipio);
-		request.setAttribute("MunicipioForm", municipioInstance);
+				.caricaSingoloMunicipio(municipioForm.getId());
+		BeanUtils.copyProperties(municipioForm, municipioInstance);
 
 		return mapping.findForward("show");
 	}
@@ -32,6 +38,7 @@ public class MunicipioAction extends DispatchAction {
 			HttpServletResponse response) throws Exception {
 
 		return mapping.findForward("create");
+	
 	}
 
 	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -53,6 +60,31 @@ public class MunicipioAction extends DispatchAction {
 		return mapping.findForward("home");
 	}
 
+	public ActionForward edit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		MunicipioForm municipioForm = (MunicipioForm) form;
+		Municipio municipioInstance = MyServiceFactory.getMunicipioServiceInstance()
+				.caricaSingoloMunicipio(municipioForm.getId());
+		BeanUtils.copyProperties(municipioForm, municipioInstance);
+
+		return mapping.findForward("edit");
+	}
+	
+	public ActionForward update(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		MunicipioForm municipioForm = (MunicipioForm) form;
+		Municipio municipioInstance = new Municipio();
+		System.out.println(municipioInstance+ "\n");
+		BeanUtils.copyProperties(municipioInstance, municipioForm);
+		System.out.println(municipioInstance);
+		MyServiceFactory.getMunicipioServiceInstance().aggiorna(municipioInstance);
+
+		request.setAttribute("municipiList", MyServiceFactory.getMunicipioServiceInstance().listAllMunicipi());
+		return mapping.findForward("list");
+	}
+	
 	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
